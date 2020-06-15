@@ -14,7 +14,7 @@ const CreateCourse = (props) => {
 				}
 			}).then(response => {
 				setUsers(response.data)
-				console.log('dsddd', response.data)
+				console.log('response', response.data)
 			});
 		},
 		[]

@@ -32,7 +32,7 @@ const AddCourseComponent = props => {
     };
     async function handleSubmit(e){
         e.preventDefault();
-        const { name, startDate,endDate, description } = formData;
+        const { name, startDate,endDate } = formData;
         const { value } = selectCategory;
         const formatStartDate = moment(startDate).format('DD/MM/yyyy');
         const formatEndDate= moment(endDate).format('DD/MM/yyyy');
@@ -43,22 +43,27 @@ const AddCourseComponent = props => {
             startDate: formatStartDate,
             endDate: formatEndDate
         }
-        const createCourse = await api.post('courses', data);
-         if (createCourse.data.status !== 400) {
-            console.log('ffff', data);
-            console.log('s', createCourse);
 
-             return (
-                props.addCourse(data),
-                setFormData(data)
-             )
-           
+        const filter = data.name === '' || data.startDate === 'Invalid date' || data.endDate === 'Invalid date' || data.category === 0;
+        console.log('eee', data);
+         if (filter) {
+             alert('preencha os campos faltantes');
          } else {
-            return alert('Curso já Cadastrado');
+            const createCourse = await api.post('courses', data);
+            console.log('dd', createCourse.data)
+            if (createCourse.data.status !== 400) {
+               console.log('response', data);
+                return (
+                   props.addCourse(createCourse.data),
+                   setFormData({data: '' })
+                )
+              
+            } else if ((createCourse.data.status === 500)) {
+               return alert('preencha os campos');
+            } else {
+               return alert('Curso já Cadastrado');
+            }
          }
-
-
-
     }
 
     function handleSelectChange(e){
