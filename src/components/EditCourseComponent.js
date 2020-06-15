@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
-const EditUserForm = props => {
-  const [ user, setUser ] = useState(props.currentUser)
+const EditCourseComponent = props => {
+  const [ course, setCourse ] = useState(props.currentCourse)
   
   useEffect(
     () => {
-      setUser(props.currentUser)
+      setCourse(props.currentCourse)
     },
     [ props ]
   )
 
   const handleInputChange = event => {
     const { name, value } = event.target
-    setUser({ ...user, [name]: value })
+    setCourse({ ...course, [name]: value })
   }
 
   return (
@@ -20,16 +20,16 @@ const EditUserForm = props => {
       onSubmit={event => {
         event.preventDefault()
        
-        props.updateUser(user.id, user)
+        props.updateCourse(course.id, course)
       }}
     >
       <h2>Editar Curso</h2>
       <label>Nome do Curso</label>
-      <input type="text" name="name" value={user.name} onChange={handleInputChange} />
+      <input type="text" name="name" value={course.name} onChange={handleInputChange} required/>
       <label>Data do início</label>
-      <input type="date" name="startDate" onChange={handleInputChange} />
+      <input type="date" name="startDate" onChange={handleInputChange} required/>
       <label>Data do término</label>
-      <input type="date" name="endDate" onChange={handleInputChange} />
+      <input type="date" name="endDate" onChange={handleInputChange} required />
       <button>editar curso</button>
       <button onClick={() => props.setEditing(false)} className="button muted-button">
         cancelar
@@ -38,4 +38,4 @@ const EditUserForm = props => {
   )
 }
 
-export default EditUserForm
+export default EditCourseComponent

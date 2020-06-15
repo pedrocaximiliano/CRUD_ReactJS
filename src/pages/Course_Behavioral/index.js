@@ -14,7 +14,7 @@ const Bahavioral = (props) => {
 					category: 1
 				}
 			}).then(response => {
-				setUsers(response.data)
+				setCourse(response.data)
 			});
 		},
 		[]
@@ -22,17 +22,17 @@ const Bahavioral = (props) => {
 
 	const initialFormState = { id: null, name: '', startDate: '', endDate: '', category: '' }
 
-	const [ users, setUsers ] = useState({})
-	const [ currentUser, setCurrentUser ] = useState(initialFormState)
+	const [ courses, setCourse ] = useState({})
+	const [ currentCourse, setCurrentCourse ] = useState(initialFormState)
 	const [ editing, setEditing ] = useState(false)
 
 	// CRUD operations
-	const addCourse = user => {
-		user.id = users.length + 1
-		setUsers([ ...users, user ])
+	const addCourse = course => {
+		course.id = courses.length + 1
+		setCourse([ ...courses, course ])
 	}
 
-	const deleteUser = id => {
+	const deleteCourse = id => {
 		setEditing(false)
 		api.delete('/courses', {
 			params: {
@@ -41,27 +41,27 @@ const Bahavioral = (props) => {
 		}).then(response => {
 			console.log(response.data);
 		});
-		setUsers(users.filter(user => user.id !== id))
+		setCourse(courses.filter(course => course.id !== id))
 	}
 
-	const updateUser = async (id, updatedUser) => {
+	const updateCourse = async (id, updCourse) => {
 		setEditing(false)
-        const { name, startDate,endDate } = updatedUser;
+        const { name, startDate,endDate } = updCourse;
         
         const update = await api.put(`courses/${id}`, { name, startDate, endDate
 		});
          if (update) {
              return (
-              setUsers(users.map(user => (user.id === id ? updatedUser : user)))
+				setCourse(courses.map(course => (course.id === id ? updCourse : course)))
              )
          } else {
             return console.log('erro', update);
          }
 	}
 
-	const editRow = user => {
+	const editRow = course => {
 		setEditing(true)
-		setCurrentUser({ id: user.id, name: user.name, startDate: user.startDate, endDate: user.endDate, category: user.category })
+		setCurrentCourse({ id: course.id, name: course.name, startDate: course.startDate, endDate: course.endDate, category: course.category })
 	}
 
 	return (
@@ -73,8 +73,8 @@ const Bahavioral = (props) => {
 							<EditCourseComponent
 								editing={editing}
 								setEditing={setEditing}
-								currentUser={currentUser}
-								updateUser={updateUser}
+								currentCourse={currentCourse}
+								updateCourse={updateCourse}
 							/>
 						</Fragment>
 					) : (
@@ -84,7 +84,7 @@ const Bahavioral = (props) => {
 					)}
 				</div>
 				<div className="flex-large grid">
-					<Grid users={users} editRow={editRow} deleteUser={deleteUser} />
+					<Grid courses={courses} editRow={editRow} deleteCourse={deleteCourse} />
 				</div>
 			</div>
 		</div>

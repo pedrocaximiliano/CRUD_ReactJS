@@ -13,23 +13,23 @@ const Grid = props => (
       </tr>
     </thead>
     <tbody>
-    {props.users.length > 0 ? (
-        props.users.map(user => (
-          <tr key={user.id}>
-            <td>{user.name}</td>
-            <td>{user.startDate}</td>
-            <td>{user.endDate}</td>
+    {props.courses.length > 0 ? (
+        props.courses.map(course => (
+          <tr key={course.id}>
+            <td>{course.name}</td>
+            <td>{course.startDate}</td>
+            <td>{course.endDate}</td>
             <td>
               <button style={{margin: "0px 16px 0px 0px"}}
                 onClick={() => {
-                  props.editRow(user)
+                  props.editRow(course)
                 }}
                 className="button muted-button"
               >
                 <GrEdit/>
               </button>
               <button style={{margin: "0px 16px 0px 0px"}}
-                onClick={() => props.deleteUser(user.id)}
+                onClick={() => props.deleteCourse(course.id)}
                 className="button muted-button"
               >
                   <BsFillTrashFill/>

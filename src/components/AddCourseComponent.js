@@ -45,14 +45,11 @@ const AddCourseComponent = props => {
         }
 
         const filter = data.name === '' || data.startDate === 'Invalid date' || data.endDate === 'Invalid date' || data.category === 0;
-        console.log('eee', data);
          if (filter) {
              alert('preencha os campos faltantes');
          } else {
             const createCourse = await api.post('courses', data);
-            console.log('dd', createCourse.data)
             if (createCourse.data.status !== 400) {
-               console.log('response', data);
                 return (
                    props.addCourse(createCourse.data),
                    setFormData({data: '' })
@@ -85,6 +82,7 @@ const AddCourseComponent = props => {
                     name="name"
                     id="name"
                     onChange={handleInputChange}
+                    required
                 />
             </div>
 
@@ -96,6 +94,7 @@ const AddCourseComponent = props => {
                         name="startDate"
                         id="startDate"
                         onChange={handleInputChange}
+                        required
                     />
                 </div>
                 <div className="field">
@@ -105,6 +104,7 @@ const AddCourseComponent = props => {
                         name="endDate"
                         id="endDate"
                         onChange={handleInputChange}
+                        required
                     />
                 </div> 
              
@@ -113,6 +113,7 @@ const AddCourseComponent = props => {
                     <label htmlFor="category">Categoria</label>
                     <Select 
                     onChange={handleSelectChange} 
+                    required
                     options={options} 
                     name="category"
                     id="category"
@@ -125,6 +126,7 @@ const AddCourseComponent = props => {
                         name="description"
                         id="description"
                         onChange={handleInputChange}
+                        required
                     />
                 </div> 
                 <button type="submit">Cadastrar Curso</button>
