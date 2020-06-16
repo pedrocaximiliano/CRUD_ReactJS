@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import AddCourseComponent from '../../components/AddCourseComponent'
 import EditCourseComponent from '../../components/EditCourseComponent'
-import Grid from '../../components/grid'
+import Grid from '../../components/Grid'
 import './styles.css';
 
 import api from '../../services/api';

@@ -2,8 +2,11 @@ import React from 'react'
 
 import {BsFillTrashFill } from 'react-icons/bs';
 import {GrEdit } from 'react-icons/gr';
+import { Jumbotron } from 'react-bootstrap';
 
 const Grid = props => (
+  <Jumbotron>
+
   <table>
     <thead>
       <tr>
@@ -44,6 +47,8 @@ const Grid = props => (
         )}
       </tbody>
   </table>
+  </Jumbotron>
+
 )
 
 export default Grid
