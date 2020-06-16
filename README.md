@@ -8,6 +8,16 @@ linguagem utilizada:
 ReactJs versão 16.13.1
 
 # Instalações de bibliotecas:
+
+React-Bootstrap: para estilização:
+
+$ npm install react-bootstrap bootstrap
+documentação: https://react-bootstrap.github.io/
+
+react Datepicker: para controle e manipulação de datas;
+npm install --save rc-datepicker;
+documentação: https://github.com/buildo/rc-datepicker
+
 axios: Biblioteca biblioteca baseada em promises para chamada de client HTTP; $ npm install axios;
 
 momentJs: Para lidar com datas e horarios; 
