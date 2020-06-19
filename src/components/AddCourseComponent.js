@@ -1,24 +1,23 @@
 import React, { useState } from 'react'
-import Select from 'react-select'
-
 import { Link } from 'react-router-dom';
 import api from '../services/api';
-import moment from 'moment'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ModalError from '../components/ModalError'
+
 import 'moment/locale/it.js';
+import moment from 'moment'
 import { DatePickerInput } from 'rc-datepicker';
 import 'rc-datepicker/lib/style.css';
 
+import { useSelector } from 'react-redux';
 
-
-import { Jumbotron } from 'react-bootstrap';
+import { Jumbotron, Modal, Button } from 'react-bootstrap';
 const AddCourseComponent = props => {
+    
+    //  const courses = useSelector(state => state.description);
 
-    const [selectCategory, setSelectCategory] = useState({
-        name: '',
-        value: '',
-    })
+    //  console.log('teste', courses);
+     
     const [formData, setFormData] = useState({
         id: null,
         name: '',
@@ -55,7 +54,6 @@ const AddCourseComponent = props => {
     function handleChildClick(e){
         setShow(e)
     };
-
    
     async function handleSubmit(e){
         e.preventDefault();
@@ -67,7 +65,6 @@ const AddCourseComponent = props => {
             startDate,
             endDate
         }
-        console.log('ss', data)
         const filter = data.name === '' || data.startDate === 'Invalid date' || data.description === '' || data.endDate === 'Invalid date' || data.category === props.valueCategory.value;
         if (filter) {
             return (
@@ -95,10 +92,9 @@ const AddCourseComponent = props => {
     }
 
 	return (
-        show ? (
-          <ModalError value={valueModal} show={show} handleClick={handleChildClick.bind(this)} />
-        ) : ( 
-            <Jumbotron>
+        <>
+        {show &&  <ModalError value={valueModal} show={show} handleClick={handleChildClick.bind(this)} /> }
+        <Jumbotron>
         <form onSubmit={handleSubmit} autoComplete="off">
             <Link to="/">
             Voltar para Home
@@ -156,7 +152,7 @@ const AddCourseComponent = props => {
             </fieldset>
         </form>
             </Jumbotron>
-        )
+            </>
 	)
 }
 

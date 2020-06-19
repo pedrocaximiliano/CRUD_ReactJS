@@ -4,9 +4,12 @@ import EditCourseComponent from '../../components/EditCourseComponent'
 import Grid from '../../components/Grid'
 import './styles.css';
 
+import { Provider } from 'react-redux';
+import store from '../../store/index'
+
 import api from '../../services/api';
 
-const CreateCourse = (props) => {
+const Programmer = (props) => {
 	useEffect(() => {
 			api.get('/courses', {
 				params: {
@@ -79,16 +82,20 @@ const CreateCourse = (props) => {
 						</Fragment>
 					) : (
 						<Fragment>
-							<AddCourseComponent addCourse={addCourse} valueCategory={props.location.state.pathValue}/>
+							<Provider store={store}>
+								<AddCourseComponent addCourse={addCourse} valueCategory={props.location.state.pathValue}/>
+							</Provider>
 						</Fragment>
 					)}
 				</div>
 				<div className="flex-large grid">
-					<Grid courses={courses} editRow={editRow} deleteCourse={deleteCourse} />
+					<Provider store={store}>
+						<Grid courses={courses} editRow={editRow} deleteCourse={deleteCourse} />
+					</Provider>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-export default CreateCourse
+export default Programmer

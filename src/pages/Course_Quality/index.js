@@ -7,7 +7,7 @@ import './styles.css';
 
 import api from '../../services/api';
 
-const CreateCourse = (props) => {
+const Quality = (props) => {
 	useEffect(() => {
 			api.get('/courses', {
 				params: {
@@ -91,4 +91,4 @@ const CreateCourse = (props) => {
 	)
 }
 
-export default CreateCourse
+export default Quality

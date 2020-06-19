@@ -6,9 +6,10 @@ import { Button, Modal } from 'react-bootstrap';
 
 const ModalError = props => {
 
-    const [show, setShow] = useState(true);
 
-    const handleClose = () => setShow(false);
+    console.log('ccc', props)
+
+    const [show, setShow] = useState(true);
 
         switch (props.value) {
         case 'Incomplet Form':
