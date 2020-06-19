@@ -10,7 +10,7 @@ const CreateCourse = (props) => {
 	useEffect(() => {
 			api.get('/courses', {
 				params: {
-					category: 2
+					category: Number(props.location.state.pathValue.value)
 				}
 			}).then(response => {
 				setCourse(response.data)
@@ -79,7 +79,7 @@ const CreateCourse = (props) => {
 						</Fragment>
 					) : (
 						<Fragment>
-							<AddCourseComponent addCourse={addCourse} />
+							<AddCourseComponent addCourse={addCourse} valueCategory={props.location.state.pathValue}/>
 						</Fragment>
 					)}
 				</div>

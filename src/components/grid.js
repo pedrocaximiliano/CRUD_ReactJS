@@ -1,8 +1,17 @@
 import React from 'react'
 
 import {BsFillTrashFill } from 'react-icons/bs';
-import {GrEdit } from 'react-icons/gr';
+import {GrEdit, GrCircleInformation } from 'react-icons/gr';
 import { Jumbotron } from 'react-bootstrap';
+
+
+const description = des => {
+  return (
+    alert('exibir as descriptions')
+  )
+
+}
+
 
 const Grid = props => (
   <Jumbotron>
@@ -10,6 +19,8 @@ const Grid = props => (
   <table>
     <thead>
       <tr>
+         {/* //criar information */}
+         <th></th>
         <th>Curso</th>
         <th>Início</th>
         <th>Término</th>
@@ -19,6 +30,7 @@ const Grid = props => (
     {props.courses.length > 0 ? (
         props.courses.map(course => (
           <tr key={course.id}>
+         <td><GrCircleInformation onClick={() => description(course.description)} /></td>
             <td>{course.name}</td>
             <td>{course.startDate}</td>
             <td>{course.endDate}</td>

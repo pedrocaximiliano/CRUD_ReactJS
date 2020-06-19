@@ -13,14 +13,7 @@ import 'rc-datepicker/lib/style.css';
 
 
 import { Jumbotron } from 'react-bootstrap';
-
 const AddCourseComponent = props => {
-    const options = [
-        { value: '1', label: 'Comportamental' },
-        { value: '2', label: 'Programação' },
-        { value: '3', label: 'Qualidade' },
-        { value: '3', label: 'Processos' }
-      ]
 
     const [selectCategory, setSelectCategory] = useState({
         name: '',
@@ -44,7 +37,6 @@ const AddCourseComponent = props => {
 
     function handleInputChangeStartCalender(e){
         const startDate = moment(e).format('DD/MM/yyyy');
-        console.log('sss0', e)
         setFormData({ ...formData, startDate: startDate });
         setCalenderEndDate({ ...calenderEndDate,  endDate: e });
         setShowEndDate({ ...showEndDate, endDate: false });
@@ -67,16 +59,16 @@ const AddCourseComponent = props => {
    
     async function handleSubmit(e){
         e.preventDefault();
-        const { name, startDate,endDate } = formData;
-        const { value } = selectCategory;
+        const { name, startDate,endDate, description} = formData;
         const data = {
             name,
-            category: Number(value),
-            //description,
+            category: Number(props.valueCategory.value),
+            description,
             startDate,
             endDate
         }
-        const filter = data.name === '' || data.startDate === 'Invalid date' || data.endDate === 'Invalid date' || data.category === 0;
+        console.log('ss', data)
+        const filter = data.name === '' || data.startDate === 'Invalid date' || data.description === '' || data.endDate === 'Invalid date' || data.category === props.valueCategory.value;
         if (filter) {
             return (
                setShow(true),
@@ -85,9 +77,7 @@ const AddCourseComponent = props => {
      
         } else {
            const createCourse = await api.post('courses', data);
-           if (options[0].value = '1') {
-               return console.log('salvou')
-           } else if (createCourse.data.status !== 400) {
+           if (createCourse.data.status !== 400) {
                return (
                   props.addCourse(createCourse.data),
                   setFormData({data: '' })
@@ -104,10 +94,6 @@ const AddCourseComponent = props => {
         }
     }
 
-    function handleSelectChange(e){
-      setSelectCategory({ ...selectCategory, value: e.value });
-    };
-
 	return (
         show ? (
           <ModalError value={valueModal} show={show} handleClick={handleChildClick.bind(this)} />
@@ -118,7 +104,10 @@ const AddCourseComponent = props => {
             Voltar para Home
         </Link>
         <h1>Cadastre o curso</h1>
+        <span>Categoria do curso: {props.valueCategory.label}</span>
         <fieldset>
+        <div className="field" style={{fontSize: 12}}>
+                </div>
             <div className="field">
                 <label htmlFor="name">Nome do Curso</label>
                 <input 
@@ -135,7 +124,6 @@ const AddCourseComponent = props => {
                     <label htmlFor="startDate">Data de inicio</label>
                        <DatePickerInput
                        required
-                       
                        minDate={calenderDate}
                        onChange={handleInputChangeStartCalender}
                        className='my-custom-datepicker-component'
@@ -153,16 +141,7 @@ const AddCourseComponent = props => {
                 </div> 
              
             </div>
-            <div className="field" style={{fontSize: 12}}>
-                    <label htmlFor="category">Categoria</label>
-                    <Select 
-                    onChange={handleSelectChange} 
-                    
-                    options={options} 
-                    name="category"
-                    id="category"
-                    />
-                </div>
+      
                 <div className="field">
                     <label htmlFor="description">Discrição do Curso</label>
                     <input 

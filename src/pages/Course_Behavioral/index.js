@@ -11,7 +11,7 @@ const Bahavioral = (props) => {
 	useEffect(() => {
 			api.get('/courses', {
 				params: {
-					category: 1
+					category: Number(props.location.state.pathValue.value)
 				}
 			}).then(response => {
 				setCourse(response.data)
@@ -79,7 +79,7 @@ const Bahavioral = (props) => {
 						</Fragment>
 					) : (
 						<Fragment>
-							<AddCourseComponent addCourse={addCourse} />
+							<AddCourseComponent addCourse={addCourse} valueCategory={props.location.state.pathValue}/>
 						</Fragment>
 					)}
 				</div>
