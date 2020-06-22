@@ -107,6 +107,7 @@ const AddCourseComponent = props => {
             <div className="field">
                 <label htmlFor="name">Nome do Curso</label>
                 <input 
+                    maxLength={10}
                     type="text"
                     name="name"
                     id="name"
@@ -141,6 +142,7 @@ const AddCourseComponent = props => {
                 <div className="field">
                     <label htmlFor="description">Discrição do Curso</label>
                     <input 
+                        maxLength={100}
                         type="textarea"
                         name="description"
                         id="description"

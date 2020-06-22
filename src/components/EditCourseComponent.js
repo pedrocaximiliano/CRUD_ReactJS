@@ -63,6 +63,16 @@ function handleInputChangeReturnCalender(e){
           onChange={handleInputChangeReturnCalender}
           className='my-custom-datepicker-component'
         />
+         <div className="field">
+            <label htmlFor="description">Discrição do Curso</label>
+            <input 
+                maxLength={100}
+                type="textarea"
+                name="description"
+                id="description"
+                onChange={handleInputChange}
+            />
+         </div> 
       <button style={{marginBottom: 10}}> editar curso</button>
       <button onClick={() => props.setEditing(false)} className="button muted-button">
         cancelar

@@ -46,9 +46,9 @@ const Bahavioral = (props) => {
 
 	const updateCourse = async (id, updCourse) => {
 		setEditing(false)
-        const { name, startDate,endDate } = updCourse;
+        const { name, startDate,endDate, description } = updCourse;
         
-        const update = await api.put(`courses/${id}`, { name, startDate, endDate
+        const update = await api.put(`courses/${id}`, { name, startDate, endDate, description
 		});
          if (update) {
              return (
@@ -61,7 +61,7 @@ const Bahavioral = (props) => {
 
 	const editRow = course => {
 		setEditing(true)
-		setCurrentCourse({ id: course.id, name: course.name, startDate: course.startDate, endDate: course.endDate, category: course.category })
+		setCurrentCourse({ id: course.id, name: course.name, startDate: course.startDate, endDate: course.endDate, category: course.category, description: course.description })
 	}
 
 	return (

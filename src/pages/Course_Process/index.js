@@ -46,9 +46,9 @@ const Process = (props) => {
 
 	const updateCourse = async (id, updCourse) => {
 		setEditing(false)
-        const { name, startDate,endDate } = updCourse;
+		const { name, startDate,endDate, description } = updCourse;
         
-        const update = await api.put(`courses/${id}`, { name, startDate, endDate
+        const update = await api.put(`courses/${id}`, { name, startDate, endDate, description
 		});
          if (update) {
              return (
